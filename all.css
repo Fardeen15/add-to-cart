@@ -1,0 +1,99 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+body{
+    background: #00537e; 
+    background: linear-gradient(to bottom,  #00537e 0%,#3aa17e 100%);
+    /* height: 100vh; */
+    background-attachment: fixed;
+}
+#mainContainer{
+ height:100vh;
+ width: 100%;
+
+}
+#headDiv{
+position: fixed;
+height: 5vh;
+width: 100%;
+background-color: rgb(0, 0, 0);
+z-index: 1;
+}
+#bodyDiv{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    top: 6%;
+}
+nav{
+    height: 5vh;
+    padding: 5px;
+}
+ul{
+    display: inline;
+}
+.item {
+    display: inline;
+    font-size: 30px;
+    margin: 4%;
+    color: white;
+}
+.order{
+    display: inline;
+    font-size: 30px;
+    float: right;
+    color: white;
+    margin-right: 15%;
+}
+li:hover{
+    /* background-color: black; */
+    color: grey;
+    font-size: 25px;
+    cursor: pointer;
+    transition: 0.6s;
+}
+.cardDiv{
+    position: relative;
+    width: 24%;
+    text-align: center;
+}
+.cardDiv img{
+    /* height: 20vh; */
+    width: 70%;
+}
+.icon{
+    font-size: 35px;
+    cursor: pointer;
+}
+.counter{
+    display: inline;
+    font-size: 30px;
+    margin-left: 17%;
+    color: white;
+    margin-right: 15%;
+}
+.cardDiv1{
+    position: relative;
+    width: 100%;
+    /* background-color: peru; */
+    /* text-align: center; */
+    
+}
+.cardDiv1 img{
+    /* height: 20vh; */
+    width: 10%;
+    margin-left: 15%;
+}
+.cardDiv1 hr{
+    border-color: black;
+    width: 80%;
+    margin-left: 5%;
+}
+.cardDiv1 span{
+    margin-left: 5%;
+}
