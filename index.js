@@ -106,53 +106,93 @@ var obj = [
     }
 ]
 // var obj2 = JSON.parse(localStorage.getItem("data"));
+var match = false;
+var index1;
 var div = document.querySelector("#bodyDiv");
-for (var i = 0; i < obj.length; i++) {
-    div.innerHTML +=
-        `<div class = "cardDiv" id = "${i}">
+
+if (!match) {
+
+    for (var i = 0; i < obj.length; i++) {
+        // quantity(i);
+        div.innerHTML +=
+            `<div class = "cardDiv" id = "${i}">
         <img src = "${obj[i].src}"></img>
         <p>${obj[i].name}<br><br> ${obj[i].price}<br><br> <span id = "quantity${i}"></span><ber><br> <span class= "icon" onclick = "remove(${i})">-</span> <span class = "icon" onclick = "add(${i})">+</span></p>
-    </div>`
+        </div>`;
+    }
+    match = true
 }
-var obj2;
-function add(index) {
+
+
+var obj2 = [];
+function getData() {
     obj2 = JSON.parse(localStorage.getItem("data"));
     if (obj2 === null) {
-        obj2 = [];
+        obj2 = []
     }
-    obj2.push(obj[index]);
+}
+
+getData()
+function add(index) {
+    // index1 = index
+
+    let flag = true
     for (var i = 0; i < obj2.length; i++) {
         if (obj[index].id === obj2[i].id) {
-            obj2[i].quantity = ++obj2[i].quantity;
-            if (obj[index].src === obj2[i].src) {
-                localStorage.setItem("data", JSON.stringify(obj2));
+            obj2[i].quantity = ++obj2[i].quantity
+            flag = false
+            localStorage.setItem("data", JSON.stringify(obj2));
+        }
+
+    }
+    if (flag) {
+        obj2.push(obj[index]);
+
+        for (var i = 0; i < obj2.length; i++) {
+            if (obj[index].id === obj2[i].id) {
+                if (obj2[i].quantity >= 0) {
+                    ++obj2[i].quantity
+                }
+            }
+        }
+        localStorage.setItem("data", JSON.stringify(obj2));
+        console.log("else", JSON.parse(localStorage.getItem("data")));
+    }
+    quantity();
+    counter();
+}
+
+function quantity() {
+
+    if (match) {
+        for (var i = 0; i < obj2.length; i++) {
+            for (var j = 0; j < obj.length; j++) {
+                if (obj2[i].id === obj[j].id) {
+                    if (obj2[i].quantity <= 0) {
+                        var quanty1 = document.querySelector(`#quantity${j}`)
+                        console.log("aaa")
+                        quanty1.innerHTML = `(Quantity)${obj2[i].quantity}`
+                    }
+                    // if (obj2[i].quantity <= 0) {
+                    //     quanty1.innerHTML = ""
+                    // }
+                }
             }
         }
     }
-    counter()
 }
-// var quantity1 = document.querySelector(`#quantity${index}`)
-// for(var i= 0; i < obj2.length; i++){
-//         // if(obj[i].id === obj2[i].id){
-//                 quantity1.innerHTML = `(Quantity)${obj2[i].quantity}`;
-//                 // console.log("correct");
-//             // }
-//         }
-//         for(var i = 0 ; i < obj2.length; i++){
-
-//             }
-
-
+// }
+quantity()
 
 var counter1 = document.querySelector(".counter");
 var get = localStorage.getItem("counter");
 if (get === null) {
     counter1.innerHTML = 0
+    console.log(get)
 } else {
     counter1.innerHTML = get
 
 }
-console.log(get)
 
 
 
@@ -173,20 +213,64 @@ function counter() {
 
 
 
-function remove(i) {
+function remove(index) {
     var counter3 = document.querySelector(".counter");
     var counter4 = document.querySelector(".counter").innerHTML;
     var less = --counter4;
     if (less >= 0) {
         counter3.innerHTML = less
     }
-    console.log(less)
-
     if (less >= 0) {
         localStorage.setItem("counter", less);
     }
+    // let flag = true
+    // for (var i = 0; i < obj2.length; i++) {
+    //     if (obj[index].id === obj2[i].id) {
+    //         obj2[i].quantity = --obj2[i].quantity
+    //         if (obj2[i].quantity  0) {
+    //             obj2.splice(i, 1);
+    //         }
+    //         flag = false
+    //         localStorage.setItem("data", JSON.stringify(obj2));
+    //     }
+
+    // }
+    // if (flag) {
+    //     obj2.push(obj[index]);
+
+    //     for (var i = 0; i < obj2.length; i++) {
+    //         if (obj[index].id === obj2[i].id) {
+    //             --obj2[i].quantity
+    //         }
+    //         console.log(obj2[i].quantity)
+    //         if (obj2[i].quantity === 0) {
+    //             obj2.splice(i, 1);
+    //             localStorage.setItem("data", JSON.stringify(obj2));
+    //             console.log("splice")
+    //         }
+    //     }
+    //     console.log("else", JSON.parse(localStorage.getItem("data")));
+    // }
+    
+    // console.log(obj[index].quantity);
+    for (var i = 0; i < obj2.length; i++) {
+        if (obj[index].id === obj2[i].id) {
+            obj2[i].quantity = --obj2[i].quantity;
+            localStorage.setItem("data", JSON.stringify(obj2))
+        }
+        console.log(obj2[i].quantity);
+        if (obj2[i].quantity === 0) {
+            obj2.splice(i, 1);
+            localStorage.setItem("data", JSON.stringify(obj2))
+        }
+    }
+    quantity();
+
+
+
 
 }
+
 
 function pageChng1() {
     window.location.href = "index.html"
