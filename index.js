@@ -133,6 +133,7 @@ function getData() {
 }
 
 getData()
+
 function add(index) {
     // index1 = index
 
@@ -168,20 +169,18 @@ function quantity() {
         for (var i = 0; i < obj2.length; i++) {
             for (var j = 0; j < obj.length; j++) {
                 if (obj2[i].id === obj[j].id) {
-                    if (obj2[i].quantity <= 0) {
+                    if (obj2[i].quantity >= 0) {
                         var quanty1 = document.querySelector(`#quantity${j}`)
-                        console.log("aaa")
                         quanty1.innerHTML = `(Quantity)${obj2[i].quantity}`
                     }
-                    // if (obj2[i].quantity <= 0) {
-                    //     quanty1.innerHTML = ""
-                    // }
+                    if (obj2[i].quantity <= 0) {
+                        quanty1.innerHTML = ""
+                    }
                 }
             }
         }
     }
 }
-// }
 quantity()
 
 var counter1 = document.querySelector(".counter");
@@ -201,16 +200,9 @@ function counter() {
     var counter2 = document.querySelector(".counter").innerHTML;
     var plus = ++counter2;
     counter1.innerHTML = plus
-
-
-
-
     localStorage.setItem("counter", plus);
+
 }
-
-
-
-
 
 
 function remove(index) {
@@ -223,6 +215,20 @@ function remove(index) {
     if (less >= 0) {
         localStorage.setItem("counter", less);
     }
+    for (var i = 0; i < obj2.length; i++) {
+        if (obj[index].id === obj2[i].id) {
+            obj2[i].quantity = --obj2[i].quantity;
+            localStorage.setItem("data", JSON.stringify(obj2))
+        }
+        console.log(obj2[i].quantity);
+        if (obj2[i].quantity === 0) {
+            obj2.splice(i, 1);
+            localStorage.setItem("data", JSON.stringify(obj2))
+        }
+    }
+    quantity();
+
+
     // let flag = true
     // for (var i = 0; i < obj2.length; i++) {
     //     if (obj[index].id === obj2[i].id) {
@@ -251,20 +257,8 @@ function remove(index) {
     //     }
     //     console.log("else", JSON.parse(localStorage.getItem("data")));
     // }
-    
+
     // console.log(obj[index].quantity);
-    for (var i = 0; i < obj2.length; i++) {
-        if (obj[index].id === obj2[i].id) {
-            obj2[i].quantity = --obj2[i].quantity;
-            localStorage.setItem("data", JSON.stringify(obj2))
-        }
-        console.log(obj2[i].quantity);
-        if (obj2[i].quantity === 0) {
-            obj2.splice(i, 1);
-            localStorage.setItem("data", JSON.stringify(obj2))
-        }
-    }
-    quantity();
 
 
 

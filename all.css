@@ -6,7 +6,6 @@
 body{
     background: #00537e; 
     background: linear-gradient(to bottom,  #00537e 0%,#3aa17e 100%);
-    /* height: 100vh; */
     background-attachment: fixed;
 }
 #mainContainer{
@@ -44,14 +43,13 @@ ul{
     color: white;
 }
 .order{
+    float: right;
     display: inline;
     font-size: 30px;
-    float: right;
     color: white;
     margin-right: 15%;
 }
 li:hover{
-    /* background-color: black; */
     color: grey;
     font-size: 25px;
     cursor: pointer;
@@ -63,9 +61,13 @@ li:hover{
     text-align: center;
     margin-top: 5%;
 }
+.cardDiv:hover{
+    background-color: rgba(0, 0, 0, 0.4);
+    /* width: 25%; */
+    transition: ease-in-out 0.6s;
+}
 .cardDiv img{
-    /* height: 20vh; */
-    width: 70%;
+    width: 60%;
 }
 .icon{
     font-size: 35px;
@@ -81,13 +83,8 @@ li:hover{
 .cardDiv1{
     position: relative;
     width: 100%;
-    /* top: 5%; */
-    /* background-color: peru; */
-    /* text-align: center; */
-    
 }
 .cardDiv1 img{
-    /* height: 20vh; */
     width: 10%;
     margin-left: 15%;
 }
@@ -109,5 +106,4 @@ li:hover{
     width: 60%;
     margin-left: 32%;
     margin-top: 3%;
-
 }
